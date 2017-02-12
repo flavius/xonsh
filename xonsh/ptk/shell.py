@@ -108,7 +108,9 @@ class PromptToolkitShell(BaseShell):
                     }
             if builtins.__xonsh_env__.get('COLOR_INPUT'):
                 if HAS_PYGMENTS:
+                    events.on_timingprobe.fire(name='Before PygmentsLexer')
                     prompt_args['lexer'] = PygmentsLexer(pyghooks.XonshLexer)
+                    events.on_timingprobe.fire(name='After PygmentsLexer')
                     prompt_args['style'] = PygmentsStyle(pyghooks.xonsh_style_proxy(self.styler))
                 else:
                     prompt_args['style'] = style_from_dict(DEFAULT_STYLE_DICT)
